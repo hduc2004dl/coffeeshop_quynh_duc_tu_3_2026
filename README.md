@@ -26,5 +26,7 @@ Vì thành phần static đã được khởi tạo sẵn trong bộ nhớ chung
 Nhược điểm:
 -Gây khó khăn cho quá trình Unit Test: Các phương thức static gắn chặt với bản thân lớp, do đó rất khó để "mock" (làm giả) khi viết test. Điều này làm giảm khả năng kiểm thử độc lập các thành phần trong hệ thống.
 -Nguy cơ rủi ro từ Global State (Trạng thái toàn cục): Nếu biến static không phải là hằng số (const hoặc final), nó có thể bị thay đổi giá trị từ bất kỳ đâu trong chương trình. Điều này phá vỡ luồng kiểm soát dữ liệu, gây ra các lỗi tiềm ẩn cực kỳ khó debug (đặc biệt trong các ứng dụng lớn hoặc chạy đa luồng).
-Phá vỡ nguyên tắc Lập trình hướng đối tượng (OOP): Việc lạm dụng static sẽ làm mất đi tính đa hình (Polymorphism) vì phương thức static không thể bị override (ghi đè). Hơn nữa, nó làm tăng độ phụ thuộc chặt chẽ (tight coupling) giữa các phần của mã nguồn, khiến code trở nên giống lập trình thủ tục (procedural) thay vì hướng đối tượng thuần túy. 
-Câu 2 3 4 đã commit code
+Phá vỡ nguyên tắc Lập trình hướng đối tượng (OOP): Việc lạm dụng static sẽ làm mất đi tính đa hình (Polymorphism) vì phương thức static không thể bị override (ghi đè). Hơn nữa, nó làm tăng độ phụ thuộc chặt chẽ (tight coupling) giữa các phần của mã nguồn, khiến code trở nên giống lập trình thủ tục (procedural) thay vì hướng đối tượng thuần túy.
+
+
+#Câu2_3_4 đã commit code
