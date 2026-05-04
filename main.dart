@@ -44,14 +44,12 @@ class DrinkData {
       ['Tất cả', ...drinks.map((d) => d.category).toSet().toList()];
 }
 
-// ─── THEME ────────────────────────────────────────────────
 const kGreen     = Color(0xFF00704A);
 const kGreenDark = Color(0xFF004F35);
 const kGold      = Color(0xFFCBA258);
 const kBg        = Color(0xFFF1F8F5);
 const kCard      = Color(0xFFFFFFFF);
 
-// ─── APP ──────────────────────────────────────────────────
 class StarbucksApp extends StatelessWidget {
   const StarbucksApp({super.key});
 
