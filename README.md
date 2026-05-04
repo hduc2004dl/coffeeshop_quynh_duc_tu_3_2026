@@ -26,6 +26,20 @@ starbucks_app/
 ├── pubspec.yaml
 └── README.md
 ```
+🎨 Thống nhất thiết kế 
+Để đảm bảo tính chuyên nghiệp theo yêu cầu bài tập nhóm, ứng dụng tuân thủ các quy tắc sau:
+
+Màu sắc chủ đạo: Starbucks Green (#00704A) được sử dụng xuyên suốt từ AppBar, nút bấm đến các biểu tượng điều hướng.
+
+Màu nền: Sử dụng màu kem nhạt (#F1F8F5) tạo cảm giác nhẹ nhàng, sạch sẽ.
+
+Widget dùng chung:
+
+_SummaryCard: Thẻ tóm tắt thông số (Tổng món, giá, sao).
+
+DrinkRowItem: Thiết kế thẻ đồ uống với vạch màu nhận diện riêng cho từng danh mục.
+
+_Tag: Nhãn hiển thị trạng thái Caffeine và Danh mục sản phẩm.
  
 ---
  
@@ -122,6 +136,8 @@ Quản lý danh sách đồ uống với đầy đủ thao tác CRUD.
 | D006 | 🌿 Iced Matcha Latte | 80K | Teavana | Thấp | |
  
 ---
+🗺️ Tính năng Bản đồ (Google Map Section)
+Ứng dụng tích hợp một widget mô phỏng vị trí cửa hàng (_GoogleMapSection) giúp khách hàng tìm kiếm địa điểm Starbucks Reserve gần nhất trong bán kính 0.5km.
  
 ## 🚀 Hướng dẫn chạy project
  
