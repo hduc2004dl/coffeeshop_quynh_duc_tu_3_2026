@@ -35,13 +35,10 @@ Màu sắc chủ đạo: Starbucks Green (#00704A) được sử dụng xuyên s
 
 Màu nền: Sử dụng màu kem nhạt (#F1F8F5) tạo cảm giác nhẹ nhàng, sạch sẽ.
 
-Widget dùng chung:
-
-_SummaryCard: Thẻ tóm tắt thông số (Tổng món, giá, sao).
-
-DrinkRowItem: Thiết kế thẻ đồ uống với vạch màu nhận diện riêng cho từng danh mục.
-
-_Tag: Nhãn hiển thị trạng thái Caffeine và Danh mục sản phẩm.
+**Widget dùng chung:**
+- `_StatCard`: Thẻ tóm tắt thông số trực quan (Tổng số đồ uống, Best Seller, Giá cao/thấp nhất).
+- `_DrinkCard`: Thiết kế thẻ hiển thị chi tiết đồ uống, tích hợp biểu tượng emoji, vạch màu nhận diện và nút thêm vào giỏ.
+- `_Chip`: Nhãn bo góc (Tag) hiển thị trạng thái mức độ Caffeine và Danh mục sản phẩm.
  
 ---
  
