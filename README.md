@@ -1,3 +1,45 @@
+## 👥 Thành viên nhóm
+- Nguyễn Văn Quỳnh - Home Screen
+- Nguyễn Hoàng Đức - Content Screen
+- Nguyễn Văn Tú - About Screen
+
+## 📌 Mô tả bài làm
+Dự án xây dựng giao diện Coffee bằng Flutter dựa trên mockup Figma đã đưa ra.
+
+## 🧱 Phân chia công việc
+| Thành viên | Công việc |
+|------------|----------|
+| Quỳnh | Xây dựng Home Screen |
+| Đức | Xây dựng Content Screen |
+| Tú | Xây dựng About Screen |
+
+## Tiến trình 
+⏳ Tiến trình công việc nhóm
+-Thống nhất yêu cầu bài tập
+🕖 7:15 – 7:30
+-Phân tích các Screen từ Figma (Home / Content / About)
+-Thảo luận cách thiết kế UI (Flutter Widgets)
+-Phân chia công việc cho từng thành viên
+🕗 7:30 – 8:00
+-Mỗi thành viên bắt đầu setup project Flutter
+-Tạo cấu trúc thư mục (screens/, widgets/)
+-Viết khung giao diện cơ bản cho Screen được phân công
+🕗 8:00 – 9:30 (Cá nhân)
+-Mỗi thành viên hoàn thiện Screen của mình:
+-UI theo mockup Figma
+-Responsive cơ bản
+-Styling (màu sắc, padding, font)
+-Đã hoàn thành 
+#Nhược điểm
+- Chưa thống nhất logo và tên sản phẩm
+## 📁 Cấu trúc project
+- lib/
+  - screens/
+    - home_screen.dart
+    - content_screen.dart
+    - about_screen.dart
+  - main.dart
+ 
 ## 📱 Giới thiệu ứng dụng
  
 **Starbucks Vietnam App** mô phỏng trải nghiệm đặt đồ uống tại Starbucks, bao gồm:
