@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "242871488197",
+    "project_id": "coffe-b2f92",
+    "storage_bucket": "coffe-b2f92.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242871488197:android:ba3abdfdd65591c093aaac",
+        "android_client_info": {
+          "package_name": "com.tdqstudio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3xMYERWhCwm7YqWhJkULzlAkFlagEKVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
