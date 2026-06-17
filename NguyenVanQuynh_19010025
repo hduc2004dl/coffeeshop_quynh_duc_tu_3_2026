@@ -1,0 +1,442 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const CoffeeShopApp());
+}
+
+class CoffeeShopApp extends StatelessWidget {
+  const CoffeeShopApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Coffee Shop UI',
+      theme: ThemeData(
+        primarySwatch: Colors.brown,
+        scaffoldBackgroundColor: const Color(0xFFFDFBF7), // Màu nền kem nhạt cổ điển
+      ),
+      home: const CoffeeHomeScreen(),
+    );
+  }
+}
+
+class CoffeeHomeScreen extends StatelessWidget {
+  const CoffeeHomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // --- THANH STATUS BAR GIẢ LẬP TRÊN CÙNG ---
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80.0),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Logo & Hạng Thành Viên (Thay cho Agoda VIP)
+                Row(
+                  children: [
+                    const Text(
+                      '☕ coffee',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.brown,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF3E2723), // Màu nâu đậm
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.star, color: Colors.amber, size: 12),
+                          SizedBox(width: 4),
+                          Text(
+                            'VIP Gold',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // Điểm thưởng tích lũy (Thay cho số tiền d 734K)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.shade100,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.amber.shade600, width: 1),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.monetization_on, color: Colors.amber, size: 16),
+                      const SizedBox(width: 4),
+                      Text(
+                        '1,250 Pts',
+                        style: TextStyle(
+                          color: Colors.brown.shade900,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+
+      // --- TOÀN BỘ NỘI DUNG CHỨA THANH CUỘN (SCROLLVIEW) ---
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 8),
+
+              // 1. Grid 2 Cột Lớn: Mua tại quầy & Giao hàng (Hotels & Flights)
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildBigCategoryCard(
+                      'Đặt Tại Quầy',
+                      Icons.local_cafe,
+                      const Color(0xFFEDDBC7),
+                      Colors.brown,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: _buildBigCategoryCard(
+                      'Giao Tận Nơi',
+                      Icons.delivery_dining,
+                      const Color(0xFFF8EAD8),
+                      Colors.orange.shade800,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // 2. Grid 3 Cột Nhỏ bên dưới (Flight+Hotel, Activities, Homes)
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildMediumCategoryCard(
+                      'Combo Bánh & Nước',
+                      Icons.fastfood,
+                      const Color(0xFFE8F5E9),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: _buildMediumCategoryCard(
+                      'Sự Kiện Workshop',
+                      Icons.event,
+                      const Color(0xFFFFF3E0),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: _buildMediumCategoryCard(
+                      'Hạt Cà Phê Gói',
+                      Icons.breakfast_dining,
+                      const Color(0xFFE1F5FE),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // 3. Dòng Menu Tiện Ích Nhỏ (Airport Transfer, Car Rentals...)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildSmallServiceIcon(Icons.card_membership, 'Thẻ Thành Viên'),
+                  _buildSmallServiceIcon(Icons.history, 'Lịch Sử Đặt'),
+                  _buildSmallServiceIcon(Icons.wallet_giftcard, 'Đổi Quà'),
+                  _buildSmallServiceIcon(Icons.storefront, 'Tìm Cửa Hàng'),
+                  _buildSmallServiceIcon(Icons.help_outline, 'Hỗ Trợ'),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // 4. Banner Khuyến Mãi (Giống Coupon Up to 18% off)
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    )
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.local_activity, color: Colors.redAccent, size: 28),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Giảm đến 20% cho đơn đầu tiên',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                          ),
+                          Text(
+                            'Áp dụng khi đặt qua ứng dụng',
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.brown,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                      ),
+                      child: const Text('Nhận mã', style: TextStyle(fontSize: 12)),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // 5. Phần "Tiếp tục đơn hàng đang chọn" (Continue planning your trip)
+              const Text(
+                'Món bạn đang quan tâm',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: Row(
+                  children: [
+                    // Giả lập hình ảnh ly Cà phê bằng Container màu sắc có Icon
+                    Container(
+                      width: 90,
+                      height: 90,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFD7CCC8),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          bottomLeft: Radius.circular(12),
+                        ),
+                      ),
+                      child: const Icon(Icons.coffee_maker, color: Colors.brown, size: 40),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Cà Phê Muối Biển Trà Bồng',
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Size M · Ít đá · 30% Đường',
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            '45.000 đ',
+                            style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // 6. Ưu đãi hôm nay (See today's deals)
+              const Text(
+                'Ưu đãi hấp dẫn hôm nay',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+              ),
+              const SizedBox(height: 10),
+              
+              // Widget cuộn ngang giả lập danh sách món giảm giá
+              SizedBox(
+                height: 160,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _buildHorizontalDealCard('Bạc Xỉu Sài Gòn', '29k', Icons.icecream_outlined),
+                    _buildHorizontalDealCard('Trà Vải Đào Dâu', '39k', Icons.local_bar),
+                    _buildHorizontalDealCard('Bánh Sừng Bò', '25k', Icons.bakery_dining),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 40), // Khoảng đệm dưới cùng
+            ],
+          ),
+        ),
+      ),
+
+      // --- 7. THANH ĐIỀU HƯỚNG DƯỚI CÙNG (BOTTOM NAVIGATION BAR) ---
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.brown,
+        unselectedItemColor: Colors.grey,
+        currentIndex: 0,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
+          BottomNavigationBarItem(icon: Icon(Icons.local_mall), label: 'Đơn hàng'),
+          BottomNavigationBarItem(icon: Icon(Icons.discount), label: 'Ưu đãi'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Đã lưu'),
+          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: 'Thêm'),
+        ],
+      ),
+    );
+  }
+
+  // --- WIDGET CHỨC NĂNG HỖ TRỢ XÂY DỰNG LAYOUT ---
+
+  // Helper cho 2 ô danh mục lớn phía trên
+  Widget _buildBigCategoryCard(String title, IconData icon, Color bgColor, Color iconColor) {
+    return Container(
+      height: 110,
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Icon(icon, size: 40, color: iconColor),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper cho 3 ô danh mục vừa ở giữa
+  Widget _buildMediumCategoryCard(String title, IconData icon, Color bgColor) {
+    return Container(
+      height: 95,
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.black54),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Icon(icon, size: 28, color: Colors.black54),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper cho dàn 5 Icon tiện ích nhỏ gọn
+  Widget _buildSmallServiceIcon(IconData icon, String label) {
+    return SizedBox(
+      width: 65,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: Colors.brown.shade700, size: 22),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 10, color: Colors.black87),
+            maxLines: 2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper tạo danh sách món ăn cuộn ngang dưới cùng
+  Widget _buildHorizontalDealCard(String name, String price, IconData icon) {
+    return Container(
+      width: 130,
+      margin: const EdgeInsets.only(right: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 80,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.brown.shade50,
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+            ),
+            child: Icon(icon, color: Colors.brown, size: 36),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12), maxLines: 1, overflow: TextOverflow.ellipsis),
+                const SizedBox(height: 2),
+                Text(price, style: const TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.bold, fontSize: 12)),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
